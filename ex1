@@ -1,0 +1,35 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            Console.Write("Enter student's age: ");
+            int age = int.Parse(Console.ReadLine());
+            ValidateAge(age);
+            Console.WriteLine("Student is eligible for admission.");
+        }
+        catch (AgeOutOfRangeException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid age.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+    }
+
+    static void ValidateAge(int age)
+    {
+        if (age < 18 || age > 25)
+        {
+            throw new AgeOutOfRangeException("The student's age must be between 18 and 25 (inclusive) for admission.");
+        }
+    }
+}
